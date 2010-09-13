@@ -1,0 +1,23 @@
+---
+version: 0.20
+date:    Sun Aug 24 18:52:39 PDT 2008
+changes:
+- Total rewrite.
+- Drop XS code. Uses pure perl.
+- Objects are scalar refs with overloading.
+- Drop null support.
+---
+version: 0.12
+date:    Tue Jun  3 21:33:58 PDT 2008
+changes:
+- Doc fixes.
+---
+version: 0.11
+date:    Mon Jun 11 12:17:58 PDT 2007
+changes:
+- Doc fixes. Thanks Adriano Ferreira.
+- Test refactoring.
+---
+version: 0.10
+date:    Sun Jun 10 15:46:33 PDT 2007
+changes: isTrue('first release');
