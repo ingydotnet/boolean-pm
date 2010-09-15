@@ -1,1 +1,2 @@
-support recognition of other boolean values.
+- support recognition of other boolean values
+- test yaml dumping

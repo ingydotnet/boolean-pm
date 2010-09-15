@@ -2,17 +2,13 @@ package boolean;
 use 5.005003;
 use strict;
 # use warnings;
-$boolean::VERSION = '0.21';
+$boolean::VERSION = '0.22';
 
 my ($true, $false);
 
 use overload
     '""' => sub { ${$_[0]} },
     '!' => sub { ${$_[0]} ? $false : $true },
-#     '${}' => sub {
-#         require Carp;
-#         Carp::croak("Attempt to dereference boolean value is illegal");
-#     },
     fallback => 1;
 
 use base 'Exporter';
@@ -179,7 +175,7 @@ Ingy döt Net <ingy@cpan.org>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2007, 2008. Ingy döt Net.
+Copyright (c) 2007, 2008, 2010. Ingy döt Net.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

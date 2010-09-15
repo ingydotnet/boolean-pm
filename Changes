@@ -1,4 +1,9 @@
 ---
+version: 0.22
+date:    Wed Sep 15 00:21:20 PDT 2010
+changes:
+- Update copyright years.
+---
 version: 0.21
 date:    Mon Sep 13 18:40:21 PDT 2010
 changes:
