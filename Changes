@@ -1,4 +1,12 @@
 ---
+version: 0.21
+date:    Mon Sep 13 18:40:21 PDT 2010
+changes:
+- Add a boolean($) coercer export function
+- Add many more tests (from 20 to 55 tests)
+- Add prototypes to all exports functions
+- Overload not and ! to return boolean
+---
 version: 0.20
 date:    Sun Aug 24 18:52:39 PDT 2008
 changes:

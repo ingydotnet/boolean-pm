@@ -1,4 +1,4 @@
-use Test::More tests => 4 * 5;
+use Test::More tests => 4 * 6;
 use strict;
 # use warnings;
 use lib 'lib';
@@ -17,13 +17,15 @@ use boolean ':test';
 
 package main;
 
-my @functions = qw(true false isTrue isFalse isBoolean);
+use boolean;
+
+my @functions = qw(true false boolean isTrue isFalse isBoolean);
 my @exports = qw(None Default All Test);
 my %exported = (
-    None    => [0,0,0,0,0],
-    Default => [1,1,0,0,0],
-    All     => [1,1,1,1,1],
-    Test    => [0,0,1,1,1],
+    None    => [false, false, false, false, false, false],
+    Default => [true, true, true, false, false, false],
+    All     => [true, true, true, true, true, true],
+    Test    => [false, false, false, true, true, true],
 );
 
 for my $export (@exports) {

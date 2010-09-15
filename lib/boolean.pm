@@ -2,12 +2,13 @@ package boolean;
 use 5.005003;
 use strict;
 # use warnings;
-$boolean::VERSION = '0.20';
+$boolean::VERSION = '0.21';
+
+my ($true, $false);
 
 use overload
-    '""' => sub {
-        ${$_[0]};
-    },
+    '""' => sub { ${$_[0]} },
+    '!' => sub { ${$_[0]} ? $false : $true },
 #     '${}' => sub {
 #         require Carp;
 #         Carp::croak("Attempt to dereference boolean value is illegal");
@@ -15,14 +16,13 @@ use overload
     fallback => 1;
 
 use base 'Exporter';
-@boolean::EXPORT = qw(true false);
+@boolean::EXPORT = qw(true false boolean);
 @boolean::EXPORT_OK = qw(isTrue isFalse isBoolean);
 %boolean::EXPORT_TAGS = (
     all    => [@boolean::EXPORT, @boolean::EXPORT_OK],
     test   => [qw(isTrue isFalse isBoolean)],
 );
 
-my ($true, $false);
 my ($true_val, $false_val, $bool_vals);
 
 BEGIN {
@@ -33,17 +33,24 @@ BEGIN {
     $bool_vals = {$true_val => 1, $false_val => 1};
 }
 
+# use XXX;
 sub true()  { $true }
 sub false() { $false }
-sub isBoolean {
+sub boolean($) {
+    return $false if scalar(@_) == 0;
+    return $true if scalar(@_) > 1;
+    return not(defined $_[0]) ? false :
+    "$_[0]" ? $true : $false;
+}
+sub isBoolean($) {
     not(defined $_[0]) ? false :
     (exists $bool_vals->{overload::StrVal($_[0])}) ? true : false;
 }
-sub isTrue  {
+sub isTrue($)  {
     not(defined $_[0]) ? false :
     (overload::StrVal($_[0]) eq $true_val)  ? true : false;
 }
-sub isFalse {
+sub isFalse($) {
     not(defined $_[0]) ? false :
     (overload::StrVal($_[0]) eq $false_val) ? true : false;
 }
