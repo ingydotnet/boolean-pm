@@ -2,7 +2,7 @@ package boolean;
 use 5.005003;
 use strict;
 # use warnings;
-$boolean::VERSION = '0.22';
+$boolean::VERSION = '0.23';
 
 my ($true, $false);
 

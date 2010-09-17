@@ -1,4 +1,9 @@
 ---
+version: 0.23
+date:    Thu Sep 16 19:27:54 PDT 2010
+changes:
+- Weird macosx dist bug broke everything. Worked around.
+---
 version: 0.22
 date:    Wed Sep 15 00:21:20 PDT 2010
 changes:
