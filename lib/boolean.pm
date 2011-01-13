@@ -2,7 +2,7 @@ package boolean;
 use 5.005003;
 use strict;
 # use warnings;
-$boolean::VERSION = '0.23';
+$boolean::VERSION = '0.24';
 
 my ($true, $false);
 
@@ -22,14 +22,22 @@ use base 'Exporter';
 my ($true_val, $false_val, $bool_vals);
 
 BEGIN {
-    $true  = do {bless \(my $t = 1), 'boolean'};
-    $false = do {bless \(my $f = 0), 'boolean'};
+    my $have_readonly = eval { require Readonly };
+
+    my $t = 1;
+    my $f = 0;
+    if ( $have_readonly ) {
+        Readonly::Scalar($t => $t);
+        Readonly::Scalar($f => $f);
+    }
+
+    $true  = do {bless \$t, 'boolean'};
+    $false = do {bless \$f, 'boolean'};
     $true_val  = overload::StrVal($true);
     $false_val = overload::StrVal($false);
     $bool_vals = {$true_val => 1, $false_val => 1};
 }
 
-# use XXX;
 sub true()  { $true }
 sub false() { $false }
 sub boolean($) {
@@ -51,6 +59,25 @@ sub isFalse($) {
     (overload::StrVal($_[0]) eq $false_val) ? true : false;
 }
 
+# Methods
+sub is_true {
+    return isTrue($_[0]);
+}
+sub is_false {
+    return isFalse($_[0]);
+}
+
+# For autobox
+sub SCALAR::boolean {
+    return boolean($_[0]);
+}
+sub SCALAR::is_true {
+    return isTrue(boolean($_[0]));
+}
+sub SCALAR::is_false {
+    return isFalse(boolean($_[0]));
+}
+
 1;
 
 =encoding utf8
@@ -65,6 +92,15 @@ boolean - Boolean support for Perl
 
     do &always if true;
     do &never if false;
+
+    do &maybe if boolean($value)->is_true;
+
+With autobox:
+
+    use autobox;
+    use boolean;
+
+    do &maybe if $value->is_true;
 
 and:
 
@@ -93,15 +129,6 @@ Every other scalar value is true.
 
 This module provides basic Boolean support, by defining two special
 objects: C<true> and C<false>.
-
-=head1 IMPLEMENTATION NOTE
-
-Version 0.20 is a complete rewrite from version 0.12. The old version
-used XS and had some fundamental flaws. The new version is pure Perl and
-is more correct. The new version depends on overload.pm to make the
-true and false objects return 1 and 0 respectively.
-
-The "null" support found in 0.12 was also removed as superfluous.
 
 =head1 RATIONALE
 
@@ -133,6 +160,11 @@ value is a singleton object, meaning there is only one "false" value in a
 Perl process at any time. You can check to see whether the value is the
 "false" object with the isFalse function described below.
 
+=item boolean($scalar)
+
+Casts the scalar value to a boolean value. If C<$scalar> is true, it
+returns C<boolean::true>, otherwise it returns C<boolean::false>.
+
 =item isTrue($scalar)
 
 Returns C<boolean::true> if the scalar passed to it is the
@@ -151,9 +183,45 @@ otherwise.
 
 =back
 
+=head1 METHODS
+
+Since true and false return objects, you can call methods on them.
+
+=over
+
+=item $boolean->is_true
+
+Same as isTrue($boolean).
+
+=item $boolean->is_false
+
+Same as isFalse($boolean).
+
+=back
+
+=head2 autobox Methods
+
+If you use C<boolean> with C<autobox> you can call the following methods on any scalar:
+
+=over
+
+=item $scalar->boolean
+
+Same as boolean($scalar).
+
+=item $scalar->is_true
+
+Same as isTrue(boolean($scalar)).
+
+=item $scalar->is_false
+
+Same as isFalse(boolean($scalar)).
+
+=back
+
 =head1 EXPORTABLES
 
-By default this module exports the C<true> and C<false> functions.
+By default this module exports the C<true>, C<false> and C<boolean> functions.
 
 The module also defines these export tags:
 
@@ -161,7 +229,7 @@ The module also defines these export tags:
 
 =item :all
 
-Exports C<true>, C<false>, C<isTrue>, C<isFalse>, C<isBoolean>
+Exports C<true>, C<false>, C<boolean>, C<isTrue>, C<isFalse>, C<isBoolean>
 
 =item :test
 
@@ -175,7 +243,7 @@ Ingy döt Net <ingy@cpan.org>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2007, 2008, 2010. Ingy döt Net.
+Copyright (c) 2007, 2008, 2010, 2011. Ingy döt Net.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

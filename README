@@ -7,6 +7,15 @@ SYNOPSIS
         do &always if true;
         do &never if false;
 
+        do &maybe if boolean($value)->is_true;
+
+    With autobox:
+
+        use autobox;
+        use boolean;
+
+        do &maybe if $value->is_true;
+
     and:
 
         use boolean ':all';
@@ -34,14 +43,6 @@ DESCRIPTION
     This module provides basic Boolean support, by defining two special
     objects: "true" and "false".
 
-IMPLEMENTATION NOTE
-    Version 0.20 is a complete rewrite from version 0.12. The old version
-    used XS and had some fundamental flaws. The new version is pure Perl and
-    is more correct. The new version depends on overload.pm to make the true
-    and false objects return 1 and 0 respectively.
-
-    The "null" support found in 0.12 was also removed as superfluous.
-
 RATIONALE
     When sharing data between programming languages, it is important to
     support the same group of basic types. In Perlish programming languages,
@@ -68,6 +69,10 @@ FUNCTIONS
         the value is the "false" object with the isFalse function described
         below.
 
+    boolean($scalar)
+        Casts the scalar value to a boolean value. If $scalar is true, it
+        returns "boolean::true", otherwise it returns "boolean::false".
+
     isTrue($scalar)
         Returns "boolean::true" if the scalar passed to it is the
         "boolean::true" object. Returns "boolean::false" otherwise.
@@ -81,13 +86,36 @@ FUNCTIONS
         "boolean::true" or "boolean::false" object. Returns "boolean::false"
         otherwise.
 
+METHODS
+    Since true and false return objects, you can call methods on them.
+
+    $boolean->is_true
+        Same as isTrue($boolean).
+
+    $boolean->is_false
+        Same as isFalse($boolean).
+
+  autobox Methods
+    If you use "boolean" with "autobox" you can call the following methods
+    on any scalar:
+
+    $scalar->boolean
+        Same as boolean($scalar).
+
+    $scalar->is_true
+        Same as isTrue(boolean($scalar)).
+
+    $scalar->is_false
+        Same as isFalse(boolean($scalar)).
+
 EXPORTABLES
-    By default this module exports the "true" and "false" functions.
+    By default this module exports the "true", "false" and "boolean"
+    functions.
 
     The module also defines these export tags:
 
     :all
-        Exports "true", "false", "isTrue", "isFalse", "isBoolean"
+        Exports "true", "false", "boolean", "isTrue", "isFalse", "isBoolean"
 
     :test
         Exports "isTrue", "isFalse", "isBoolean"
@@ -96,7 +124,7 @@ AUTHOR
     Ingy döt Net <ingy@cpan.org>
 
 COPYRIGHT
-    Copyright (c) 2007, 2008, 2010. Ingy döt Net.
+    Copyright (c) 2007, 2008, 2010, 2011. Ingy döt Net.
 
     This program is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
