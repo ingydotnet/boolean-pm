@@ -2,7 +2,7 @@ package boolean;
 use 5.005003;
 use strict;
 # use warnings;
-$boolean::VERSION = '0.24';
+$boolean::VERSION = '0.25';
 
 my ($true, $false);
 
@@ -26,13 +26,14 @@ BEGIN {
 
     my $t = 1;
     my $f = 0;
+    $true  = do {bless \$t, 'boolean'};
+    $false = do {bless \$f, 'boolean'};
+
     if ( $have_readonly ) {
         Readonly::Scalar($t => $t);
         Readonly::Scalar($f => $f);
     }
 
-    $true  = do {bless \$t, 'boolean'};
-    $false = do {bless \$f, 'boolean'};
     $true_val  = overload::StrVal($true);
     $false_val = overload::StrVal($false);
     $bool_vals = {$true_val => 1, $false_val => 1};
@@ -41,14 +42,10 @@ BEGIN {
 sub true()  { $true }
 sub false() { $false }
 sub boolean($) {
-    return $false if scalar(@_) == 0;
-    return $true if scalar(@_) > 1;
+    die "Not enough arguments for boolean::boolean" if scalar(@_) == 0;
+    die "Too many arguments for boolean::boolean" if scalar(@_) > 1;
     return not(defined $_[0]) ? false :
     "$_[0]" ? $true : $false;
-}
-sub isBoolean($) {
-    not(defined $_[0]) ? false :
-    (exists $bool_vals->{overload::StrVal($_[0])}) ? true : false;
 }
 sub isTrue($)  {
     not(defined $_[0]) ? false :
@@ -58,24 +55,9 @@ sub isFalse($) {
     not(defined $_[0]) ? false :
     (overload::StrVal($_[0]) eq $false_val) ? true : false;
 }
-
-# Methods
-sub is_true {
-    return isTrue($_[0]);
-}
-sub is_false {
-    return isFalse($_[0]);
-}
-
-# For autobox
-sub SCALAR::boolean {
-    return boolean($_[0]);
-}
-sub SCALAR::is_true {
-    return isTrue(boolean($_[0]));
-}
-sub SCALAR::is_false {
-    return isFalse(boolean($_[0]));
+sub isBoolean($) {
+    not(defined $_[0]) ? false :
+    (exists $bool_vals->{overload::StrVal($_[0])}) ? true : false;
 }
 
 1;
@@ -93,14 +75,7 @@ boolean - Boolean support for Perl
     do &always if true;
     do &never if false;
 
-    do &maybe if boolean($value)->is_true;
-
-With autobox:
-
-    use autobox;
-    use boolean;
-
-    do &maybe if $value->is_true;
+    do &maybe if boolean($value)->isTrue;
 
 and:
 
@@ -148,17 +123,17 @@ This module defines the following functions:
 
 =item true
 
-This function returns a scalar value which should evaluate to true. The
+This function returns a scalar value which will evaluate to true. The
 value is a singleton object, meaning there is only one "true" value in a
 Perl process at any time. You can check to see whether the value is the
 "true" object with the isTrue function described below.
 
 =item false
 
-This function returns a scalar value which should evaluate to false. The
-value is a singleton object, meaning there is only one "false" value in a
-Perl process at any time. You can check to see whether the value is the
-"false" object with the isFalse function described below.
+This function returns a scalar value which will evaluate to false. The
+value is a singleton object, meaning there is only one "false" value in
+a Perl process at any time. You can check to see whether the value is
+the "false" object with the isFalse function described below.
 
 =item boolean($scalar)
 
@@ -189,35 +164,15 @@ Since true and false return objects, you can call methods on them.
 
 =over
 
-=item $boolean->is_true
+=item $boolean->isTrue
 
 Same as isTrue($boolean).
 
-=item $boolean->is_false
+=item $boolean->isFalse
 
 Same as isFalse($boolean).
 
-=back
-
-=head2 autobox Methods
-
-If you use C<boolean> with C<autobox> you can call the following methods on any scalar:
-
 =over
-
-=item $scalar->boolean
-
-Same as boolean($scalar).
-
-=item $scalar->is_true
-
-Same as isTrue(boolean($scalar)).
-
-=item $scalar->is_false
-
-Same as isFalse(boolean($scalar)).
-
-=back
 
 =head1 EXPORTABLES
 
@@ -230,10 +185,6 @@ The module also defines these export tags:
 =item :all
 
 Exports C<true>, C<false>, C<boolean>, C<isTrue>, C<isFalse>, C<isBoolean>
-
-=item :test
-
-Exports C<isTrue>, C<isFalse>, C<isBoolean>
 
 =back
 

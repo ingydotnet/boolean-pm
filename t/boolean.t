@@ -1,4 +1,4 @@
-use Test::More tests => 61;
+use Test::More tests => 65;
 use strict;
 use lib 'lib';
 
@@ -87,6 +87,19 @@ ok $f eq 0, 'false eq 0';
 ok $f == 0, 'false == 0';
 
 # boolean()
+eval "boolean()";
+like $@, qr/Not enough arguments for boolean::boolean/,
+    "boolean() has too few args (prototyped)";
+eval "&boolean()";
+like $@, qr/Not enough arguments for boolean::boolean/,
+    "&boolean() has too few args (unprototyped)";
+eval "boolean(1,2,3)";
+like $@, qr/Too many arguments for boolean::boolean/,
+    "boolean(1,2,3) has too many args (prototyped)";
+eval "&boolean(1,2,3)";
+like $@, qr/Too many arguments for boolean::boolean/,
+    "&boolean(1,2,3) has too many args (unprototyped)";
+
 my @t = (0);
 ok isBoolean(boolean(42)), "boolean() returns boolean";
 ok isBoolean(boolean(undef)), "boolean() works with undef";
@@ -118,5 +131,5 @@ SKIP: {
     }
 }
 
-ok true->is_true, "true is_true";
-ok false->is_false, "true is_true";
+ok true->isTrue, "true isTrue";
+ok false->isFalse, "false isFalse";
