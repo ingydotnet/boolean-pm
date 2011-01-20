@@ -2,7 +2,7 @@ package boolean;
 use 5.005003;
 use strict;
 # use warnings;
-$boolean::VERSION = '0.25';
+$boolean::VERSION = '0.26';
 
 my ($true, $false);
 
@@ -172,7 +172,7 @@ Same as isTrue($boolean).
 
 Same as isFalse($boolean).
 
-=over
+=back
 
 =head1 EXPORTABLES
 
