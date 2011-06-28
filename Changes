@@ -1,4 +1,9 @@
 ---
+version: 0.27
+date:    Tue Jun 28 10:47:01 EDT 2011
+changes:
+- Switch to Module::Package at YAPC 2011 ++
+---
 version: 0.26
 date:    Fri Jan 21 00:05:44 EST 2011
 changes:

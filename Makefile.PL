@@ -1,12 +1,3 @@
-use inc::Module::Install;
-
-all_from        'lib/boolean.pm';
-
-readme_from;
-manifest_skip;
-version_check;
-ack_xxx;
+use inc::Module::Package 'Ingy:modern 0.13';
 
 recommends      'Readonly';
-
-WriteAll;
