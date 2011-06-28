@@ -12,14 +12,14 @@ changes:
 - Removed the new methods and autobox methods.
   They didn't add much except confusion.
 - Documented that you can use isTrue and isFalse as methods.
-- &boolean(1,2,3) now dies like boolean(1,2,3)
-- &boolean() now dies like boolean()
+- '&boolean(1,2,3) now dies like boolean(1,2,3)'
+- '&boolean() now dies like boolean()'
 ---
 version: 0.24
 date:    Thu Jan 13 15:27:09 EST 2011
 changes:
-- @Schwern++ found out how to make true and false immutable.
-  Kudos to #strategicdata++.
+- '@Schwern++ found out how to make true and false immutable.
+  Kudos to #strategicdata++.'
 - Document the boolean() function.
 - Added is_true and is_false methods.
 - Added boolean, is_true, and is_false autobox methods
