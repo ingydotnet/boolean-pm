@@ -1,8 +1,8 @@
-package boolean;
 use 5.005003;
+package boolean;
 use strict;
-# use warnings;
-$boolean::VERSION = '0.27';
+
+$boolean::VERSION = '0.28';
 
 my ($true, $false);
 
@@ -18,6 +18,13 @@ use base 'Exporter';
     all    => [@boolean::EXPORT, @boolean::EXPORT_OK],
     test   => [qw(isTrue isFalse isBoolean)],
 );
+
+sub import {
+    my @options = grep $_ ne '-truth', @_;
+    $_[0]->truth if @options != @_;
+    @_ = @options;
+    goto &Exporter::import;
+}
 
 my ($true_val, $false_val, $bool_vals);
 
@@ -60,6 +67,18 @@ sub isBoolean($) {
     (exists $bool_vals->{overload::StrVal($_[0])}) ? true : false;
 }
 
+sub truth {
+    # enable modifying true and false
+    &Internals::SvREADONLY( \ !!0, 0);
+    &Internals::SvREADONLY( \ !!1, 0);
+    # turn perl internal booleans into blessed booleans:
+    ${ \ !!0 } = $false;
+    ${ \ !!1 } = $true;
+    # make true and false read-only again
+    &Internals::SvREADONLY( \ !!0, 1);
+    &Internals::SvREADONLY( \ !!1, 1);
+}
+
 1;
 
 =encoding utf8
@@ -85,6 +104,13 @@ and:
 
     do &something if isTrue($guess);
     do &something_else if isFalse($guess);
+
+and:
+
+    use boolean -truth;
+
+    die unless ref(42 == 42) eq 'boolean';
+    die unless ("foo" =~ /bar/) eq '0';
 
 =head1 DESCRIPTION
 
@@ -174,7 +200,7 @@ Same as isFalse($boolean).
 
 =back
 
-=head1 EXPORTABLES
+=head1 USE OPTIONS
 
 By default this module exports the C<true>, C<false> and C<boolean> functions.
 
@@ -187,6 +213,20 @@ The module also defines these export tags:
 Exports C<true>, C<false>, C<boolean>, C<isTrue>, C<isFalse>, C<isBoolean>
 
 =back
+
+=head2 -truth
+
+You can specify the C<-truth> option to override truth operators to return
+C<boolean> values.
+
+    use boolean -truth;
+    print ref("hello" eq "world"), "\n";
+
+Prints:
+
+    boolean
+
+C<-truth> can be used with the other import options.
 
 =head1 AUTHOR
 

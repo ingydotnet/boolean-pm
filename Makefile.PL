@@ -1,3 +1,3 @@
-use inc::Module::Package 'Ingy:modern 0.13';
+use inc::Module::Package 'Ingy:modern 0.15';
 
 recommends      'Readonly';

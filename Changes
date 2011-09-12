@@ -1,4 +1,12 @@
 ---
+version: 0.28
+date:    Mon Sep 12 13:51:47 CEST 2011
+changes:
+- Added -truth option.
+- This idea was inspired by https://rt.cpan.org/Ticket/Display.html?id=65536
+- Awesome idea!
+- Released from Liz++&Wendy++ downstairs bathroom
+---
 version: 0.27
 date:    Tue Jun 28 10:47:01 EDT 2011
 changes:

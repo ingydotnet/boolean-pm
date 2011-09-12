@@ -18,6 +18,13 @@ SYNOPSIS
         do &something if isTrue($guess);
         do &something_else if isFalse($guess);
 
+    and:
+
+        use boolean -truth;
+
+        die unless ref(42 == 42) eq 'boolean';
+        die unless ("foo" =~ /bar/) eq '0';
+
 DESCRIPTION
     Most programming languages have a native "Boolean" data type. Perl does
     not.
@@ -88,7 +95,7 @@ METHODS
     $boolean->isFalse
         Same as isFalse($boolean).
 
-EXPORTABLES
+USE OPTIONS
     By default this module exports the "true", "false" and "boolean"
     functions.
 
@@ -96,6 +103,19 @@ EXPORTABLES
 
     :all
         Exports "true", "false", "boolean", "isTrue", "isFalse", "isBoolean"
+
+  -truth
+    You can specify the "-truth" option to override truth operators to
+    return "boolean" values.
+
+        use boolean -truth;
+        print ref("hello" eq "world"), "\n";
+
+    Prints:
+
+        boolean
+
+    "-truth" can be used with the other import options.
 
 AUTHOR
     Ingy döt Net <ingy@cpan.org>
