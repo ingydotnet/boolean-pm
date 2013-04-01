@@ -79,6 +79,8 @@ sub truth {
     &Internals::SvREADONLY( \ !!1, 1);
 }
 
+sub TO_JSON() { ${$_[0]} ? \1 : \ 0 }
+
 1;
 
 =encoding utf8
