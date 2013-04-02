@@ -2,7 +2,7 @@ use 5.005003;
 package boolean;
 use strict;
 
-$boolean::VERSION = '0.28';
+$boolean::VERSION = '0.29';
 
 my ($true, $false);
 
@@ -79,7 +79,7 @@ sub truth {
     &Internals::SvREADONLY( \ !!1, 1);
 }
 
-sub TO_JSON() { ${$_[0]} ? \1 : \ 0 }
+sub TO_JSON() { ${$_[0]} ? \1 : \0 }
 
 1;
 
@@ -236,7 +236,7 @@ Ingy döt Net <ingy@cpan.org>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2007, 2008, 2010, 2011. Ingy döt Net.
+Copyright (c) 2007, 2008, 2010, 2011, 2013. Ingy döt Net.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

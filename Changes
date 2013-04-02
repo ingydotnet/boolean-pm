@@ -1,4 +1,9 @@
 ---
+version: 0.29
+date:    Mon Apr  1 21:48:31 PDT 2013
+changes:
+- Support JSON and JSON::XS. dankogai-san++
+---
 version: 0.28
 date:    Mon Sep 12 13:51:47 CEST 2011
 changes:

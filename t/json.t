@@ -5,7 +5,9 @@ SKIP: {
     skip "JSON is missing", 2 unless $HAVE_JSON;
     eval{
         my $json = JSON->new->convert_blessed();
-        is($json->encode({false => (0 == 1)}), '{"false":false}');
-        is($json->encode({true  => (1 == 1)}), '{"true":true}');
+        is($json->encode({false => (0 == 1)}), '{"false":false}',
+            'JSON false works');
+        is($json->encode({true  => (1 == 1)}), '{"true":true}',
+            'JSON true works');
     }
 };
