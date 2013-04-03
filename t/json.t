@@ -1,3 +1,4 @@
+use strict; use warnings;
 use Test::More tests => 2;
 use boolean -truth;
 my $HAVE_JSON = eval { require JSON };

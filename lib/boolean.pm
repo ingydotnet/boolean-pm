@@ -1,6 +1,6 @@
 use 5.005003;
 package boolean;
-use strict;
+use strict; use warnings;
 
 $boolean::VERSION = '0.29';
 
@@ -79,7 +79,7 @@ sub truth {
     &Internals::SvREADONLY( \ !!1, 1);
 }
 
-sub TO_JSON() { ${$_[0]} ? \1 : \0 }
+sub TO_JSON { ${$_[0]} ? \1 : \0 }
 
 1;
 
@@ -229,6 +229,16 @@ Prints:
     boolean
 
 C<-truth> can be used with the other import options.
+
+=head1 JSON SUPPORT
+
+JSON.pm will encode Perl data with boolean.pm values correctly if you use the
+C<convert_blessed> option:
+
+    use JSON;
+    use boolean -truth;
+    my $json = JSON->new->convert_blessed;
+    say $json->encode({false => (0 == 1)});     # Says: '{"false":false}',
 
 =head1 AUTHOR
 
