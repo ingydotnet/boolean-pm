@@ -117,6 +117,15 @@ USE OPTIONS
 
     "-truth" can be used with the other import options.
 
+JSON SUPPORT
+    JSON.pm will encode Perl data with boolean.pm values correctly if you
+    use the "convert_blessed" option:
+
+        use JSON;
+        use boolean -truth;
+        my $json = JSON->new->convert_blessed;
+        say $json->encode({false => (0 == 1)});     # Says: '{"false":false}',
+
 AUTHOR
     Ingy döt Net <ingy@cpan.org>
 

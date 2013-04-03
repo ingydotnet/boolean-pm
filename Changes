@@ -1,4 +1,11 @@
 ---
+version: 0.30
+date:    Wed Apr  3 15:24:44 PDT 2013
+changes:
+- Fix https://rt.cpan.org/Public/Bug/Display.html?id=84398
+- chip++
+- Documented JSON support.
+---
 version: 0.29
 date:    Mon Apr  1 21:48:31 PDT 2013
 changes:
