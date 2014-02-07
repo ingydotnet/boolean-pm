@@ -1,4 +1,9 @@
 ---
+version: 0.31
+date:    Thu Feb  6 18:28:28 PST 2014
+changes:
+- Switch to dzil
+---
 version: 0.30
 date:    Wed Apr  3 15:24:44 PDT 2013
 changes:
@@ -88,4 +93,5 @@ changes:
 ---
 version: 0.10
 date:    Sun Jun 10 15:46:33 PDT 2007
-changes: isTrue('first release');
+changes:
+- isTrue('first release');

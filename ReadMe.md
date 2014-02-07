@@ -1,0 +1,155 @@
+# NAME
+
+boolean - Boolean support for Perl
+
+# SYNOPSIS
+
+    use boolean;
+
+    do &always if true;
+    do &never if false;
+
+    do &maybe if boolean($value)->isTrue;
+
+and:
+
+    use boolean ':all';
+
+    $guess = int(rand(2)) % 2 ? true : false;
+
+    do &something if isTrue($guess);
+    do &something_else if isFalse($guess);
+
+and:
+
+    use boolean -truth;
+
+    die unless ref(42 == 42) eq 'boolean';
+    die unless ("foo" =~ /bar/) eq '0';
+
+# DESCRIPTION
+
+Most programming languages have a native `Boolean` data type.
+Perl does not.
+
+Perl has a simple and well known Truth System. The following scalar
+values are false:
+
+    $false1 = undef;
+    $false2 = 0;
+    $false3 = 0.0;
+    $false4 = '';
+    $false5 = '0';
+
+Every other scalar value is true.
+
+This module provides basic Boolean support, by defining two special
+objects: `true` and `false`.
+
+# RATIONALE
+
+When sharing data between programming languages, it is important to
+support the same group of basic types. In Perlish programming languages,
+these types include: Hash, Array, String, Number, Null and Boolean. Perl
+lacks native Boolean support.
+
+Data interchange modules like YAML and JSON can now `use boolean` to
+encode/decode/roundtrip Boolean values.
+
+# FUNCTIONS
+
+This module defines the following functions:
+
+- true
+
+    This function returns a scalar value which will evaluate to true. The
+    value is a singleton object, meaning there is only one "true" value in a
+    Perl process at any time. You can check to see whether the value is the
+    "true" object with the isTrue function described below.
+
+- false
+
+    This function returns a scalar value which will evaluate to false. The
+    value is a singleton object, meaning there is only one "false" value in
+    a Perl process at any time. You can check to see whether the value is
+    the "false" object with the isFalse function described below.
+
+- boolean($scalar)
+
+    Casts the scalar value to a boolean value. If `$scalar` is true, it
+    returns `boolean::true`, otherwise it returns `boolean::false`.
+
+- isTrue($scalar)
+
+    Returns `boolean::true` if the scalar passed to it is the
+    `boolean::true` object. Returns `boolean::false` otherwise.
+
+- isFalse($scalar)
+
+    Returns `boolean::true` if the scalar passed to it is the
+    `boolean::false` object. Returns `boolean::false` otherwise.
+
+- isBoolean($scalar)
+
+    Returns `boolean::true` if the scalar passed to it is the
+    `boolean::true` or `boolean::false` object. Returns `boolean::false`
+    otherwise.
+
+# METHODS
+
+Since true and false return objects, you can call methods on them.
+
+- $boolean->isTrue
+
+    Same as isTrue($boolean).
+
+- $boolean->isFalse
+
+    Same as isFalse($boolean).
+
+# USE OPTIONS
+
+By default this module exports the `true`, `false` and `boolean` functions.
+
+The module also defines these export tags:
+
+- :all
+
+    Exports `true`, `false`, `boolean`, `isTrue`, `isFalse`, `isBoolean`
+
+## \-truth
+
+You can specify the `-truth` option to override truth operators to return
+`boolean` values.
+
+    use boolean -truth;
+    print ref("hello" eq "world"), "\n";
+
+Prints:
+
+    boolean
+
+`-truth` can be used with the other import options.
+
+# JSON SUPPORT
+
+JSON.pm will encode Perl data with boolean.pm values correctly if you use the
+`convert_blessed` option:
+
+    use JSON;
+    use boolean -truth;
+    my $json = JSON->new->convert_blessed;
+    say $json->encode({false => (0 == 1)});     # Says: '{"false":false}',
+
+# AUTHOR
+
+Ingy döt Net <ingy@cpan.org>
+
+# COPYRIGHT
+
+Copyright (c) 2007, 2008, 2010, 2011, 2013, 2014. Ingy döt Net.
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+
+See http://www.perl.com/perl/misc/Artistic.html
