@@ -1,4 +1,9 @@
 ---
+version: 0.32
+date:    Sat Feb  8 19:17:09 PST 2014
+changes:
+- Some dzil changes
+---
 version: 0.31
 date:    Thu Feb  6 18:28:28 PST 2014
 changes:
