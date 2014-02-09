@@ -1,5 +1,6 @@
 use strict; use warnings;
 package boolean;
+# VERSION
 
 my ($true, $false);
 
