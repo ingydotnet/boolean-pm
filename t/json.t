@@ -4,13 +4,11 @@ use boolean -truth;
 my $HAVE_JSON = eval { require JSON };
 SKIP: {
     skip "JSON is missing", 3 unless $HAVE_JSON;
-    eval{
-        my $json = JSON->new->convert_blessed();
-        is($json->encode({false => (0 == 1)}), '{"false":false}',
-            'JSON false works');
-        is($json->encode({true  => (1 == 1)}), '{"true":true}',
-            'JSON true works');
-        is(ref(boolean::TO_JSON(true)), 'SCALAR',
-            'Make sure we can call boolean::TO_JSON($b)');
-    }
+    my $json = JSON->new->convert_blessed();
+    is($json->encode({false => (0 == 1)}), '{"false":false}',
+        'JSON false works');
+    is($json->encode({true  => (1 == 1)}), '{"true":true}',
+        'JSON true works');
+    is(ref(boolean::TO_JSON(true)), 'SCALAR',
+        'Make sure we can call boolean::TO_JSON($b)');
 };
