@@ -133,12 +133,12 @@ Prints:
 
 # JSON SUPPORT
 
-JSON.pm will encode Perl data with boolean.pm values correctly if you use the
-`convert_blessed` option:
+JSON::MaybeXS (or less preferably JSON.pm ) will encode Perl data with
+boolean.pm values correctly if you use the `convert_blessed` option:
 
-    use JSON;
+    use JSON::MaybeXS;
     use boolean -truth;
-    my $json = JSON->new->convert_blessed;
+    my $json = JSON::MaybeXS->new->convert_blessed;
     say $json->encode({false => (0 == 1)});     # Says: '{"false":false}',
 
 # AUTHOR
