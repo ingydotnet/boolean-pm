@@ -1,0 +1,26 @@
+=meta: 0.0.1
+
+name: boolean
+version: 0.33
+abstract: Boolean support for Perl
+homepage: http://pegex.org
+
+license: perl
+copyright: 2007, 2008, 2010, 2011, 2013, 2014. Ingy döt Net.
+author:
+  name: Ingy döt Net
+  email: ingy@cpan.org
+  github: ingydotnet
+  twitter: ingydotnet
+  freenode: ingy
+  homepage: http://ingy.net
+
+requires:
+  perl: 5.8.1
+
+devel:
+  git: git@github.org/ingydotnet/boolean-pm
+  irc: irc.perl.org/perl
+  bug: https://github.com/ingydotnet/boolean-pm/issues/
+
+=travis: perl

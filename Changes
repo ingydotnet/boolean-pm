@@ -1,4 +1,9 @@
 ---
+version: 0.33
+date:    Sat May 24 00:41:05 PDT 2014
+changes:
+- Package with Zill::Dist
+---
 version: 0.32
 date:    Sat Feb  8 19:17:09 PST 2014
 changes:
