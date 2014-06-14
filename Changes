@@ -1,8 +1,14 @@
 ---
-version: 0.33
-date:    Sat May 24 00:41:05 PDT 2014
+version: 0.34
+date:    Sat Jun 14 13:16:30 PDT 2014
 changes:
-- Package with Zill::Dist
+- Release 0.33 got botched.
+---
+version: 0.33
+date:    Sat Jun 14 12:59:00 PDT 2014
+changes:
+- Package with Zilla::Dist
+- Add badges
 ---
 version: 0.32
 date:    Sat Feb  8 19:17:09 PST 2014

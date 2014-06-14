@@ -10,28 +10,32 @@ See http://github.com/ingydotnet/kwim-pm#readme
 
 boolean - Boolean support for Perl
 
+=for html
+<a href="https://travis-ci.org/ingydotnet/boolean-pm"><img src="https://travis-ci.org/ingydotnet/boolean-pm.png" alt="boolean-pm"></a>
+<a href="https://coveralls.io/r/ingydotnet/boolean-pm?branch=master"><img src="https://coveralls.io/repos/ingydotnet/boolean-pm/badge.png" alt="boolean-pm"></a>
+
 =head1 SYNOPSIS
 
     use boolean;
-    
+
     do &always if true;
     do &never if false;
-    
+
     do &maybe if boolean($value)->isTrue;
 
 and:
 
     use boolean ':all';
-    
+
     $guess = int(rand(2)) % 2 ? true : false;
-    
+
     do &something if isTrue($guess);
     do &something_else if isFalse($guess);
 
 and:
 
     use boolean -truth;
-    
+
     die unless ref(42 == 42) eq 'boolean';
     die unless ("foo" =~ /bar/) eq '0';
 
@@ -83,34 +87,25 @@ is a singleton object, meaning there is only one "false" value in a Perl
 process at any time. You can check to see whether the value is the "false"
 object with the isFalse function described below.
 
-=item returns `boolean
+=item C<boolean($scalar)>
 
-trueC<, otherwise it returns >boolean::false`.
+Casts the scalar value to a boolean value. If C<$scalar> is true, it returns
+C<boolean::true>, otherwise it returns C<boolean::false>.
 
-C<boolean($scalar)>
-Casts the scalar value to a boolean value. If C<$scalar> is true, it
+=item C<isTrue($scalar)>
 
-=item Returns `boolean
+Returns C<boolean::true> if the scalar passed to it is the C<boolean::true>
+object. Returns C<boolean::false> otherwise.
 
-true` if the scalar passed to it is the
+=item C<isFalse($scalar)>
 
-C<isTrue($scalar)>
-C<boolean::true> object. Returns C<boolean::false> otherwise.
+Returns C<boolean::true> if the scalar passed to it is the C<boolean::false>
+object. Returns C<boolean::false> otherwise.
 
-=item Returns `boolean
+=item C<isBoolean($scalar)>
 
-true` if the scalar passed to it is the
-
-C<isFalse($scalar)>
+Returns C<boolean::true> if the scalar passed to it is the C<boolean::true> or
 C<boolean::false> object. Returns C<boolean::false> otherwise.
-
-=item Returns `boolean
-
-true` if the scalar passed to it is the
-
-C<isBoolean($scalar)>
-C<boolean::true> or C<boolean::false> object. Returns C<boolean::false>
-otherwise.
 
 =back
 
@@ -160,12 +155,12 @@ C<-truth> can be used with the other import options.
 
 =head1 JSON SUPPORT
 
-JSON.pm will encode Perl data with boolean.pm values correctly if you use the
-C<convert_blessed> option:
+JSON::MaybeXS (or less preferably JSON.pm ) will encode Perl data with
+boolean.pm values correctly if you use the C<convert_blessed> option:
 
-    use JSON;
+    use JSON::MaybeXS;
     use boolean -truth;
-    my $json = JSON->new->convert_blessed;
+    my $json = JSON::MaybeXS->new->convert_blessed;
     say $json->encode({false => (0 == 1)});     # Says: '{"false":false}',
 
 =head1 AUTHOR
@@ -174,7 +169,7 @@ Ingy döt Net <ingy@cpan.org>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2007, 2008, 2010, 2011, 2013, 2014. Ingy döt Net.
+Copyright 2007, 2008, 2010, 2011, 2013, 2014. Ingy döt Net
 
 This program is free software; you can redistribute it and/or modify it under
 the same terms as Perl itself.
