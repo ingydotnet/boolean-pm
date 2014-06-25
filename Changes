@@ -1,6 +1,11 @@
 ---
+version: 0.37
+date:    Wed Jun 25 16:47:29 PDT 2014
+changes:
+- Add JSON to recommends
+---
 version: 0.36
-date:    Wed Jun 25 16:39:02 PDT 2014
+date:    Wed Jun 25 16:46:39 PDT 2014
 changes:
 - Fix homepage in metadata
 ---
