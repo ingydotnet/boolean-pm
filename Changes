@@ -1,4 +1,9 @@
 ---
+version: 0.36
+date:    Wed Jun 25 16:39:02 PDT 2014
+changes:
+- Fix homepage in metadata
+---
 version: 0.35
 date:    Tue Jun 17 10:59:25 PDT 2014
 changes:

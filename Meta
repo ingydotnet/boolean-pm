@@ -1,12 +1,12 @@
 =meta: 0.0.1
 
 name: boolean
-version: 0.35
+version: 0.36
 abstract: Boolean support for Perl
-homepage: http://pegex.org
+homepage: https://metacpan.org/release/boolean
 
 license: perl
-copyright: 2007, 2008, 2010, 2011, 2013, 2014. Ingy döt Net.
+copyright: 2007-2014. Ingy döt Net.
 author:
   name: Ingy döt Net
   email: ingy@cpan.org
