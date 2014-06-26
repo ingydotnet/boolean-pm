@@ -1,4 +1,9 @@
 ---
+version: 0.38
+date:    Wed Jun 25 21:08:05 PDT 2014
+changes:
+- Revert json.t. Failed on cpantesters.
+---
 version: 0.37
 date:    Wed Jun 25 16:47:29 PDT 2014
 changes:

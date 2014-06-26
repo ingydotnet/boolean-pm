@@ -1,7 +1,7 @@
 use strict; use warnings;
 use Test::More tests => 3;
 use boolean -truth;
-my $HAVE_JSON = eval { require JSON::MaybeXS; 1 };
+my $HAVE_JSON = eval { require JSON::MaybeXS };
 SKIP: {
     skip "JSON is missing", 3 unless $HAVE_JSON;
     eval{
