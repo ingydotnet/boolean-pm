@@ -118,19 +118,19 @@ The module also defines these export tags:
 
   Exports `true`, `false`, `boolean`, `isTrue`, `isFalse`, `isBoolean`
 
-=head2 -truth
+- `-truth`
 
-You can specify the `-truth` option to override truth operators to return
-`boolean` values.
+  You can specify the `-truth` option to override truth operators to return
+  `boolean` values.
 
-  use boolean -truth;
-  print ref("hello" eq "world"), "\n";
+    use boolean -truth;
+    print ref("hello" eq "world"), "\n";
 
-Prints:
+  Prints:
 
-  boolean
+    boolean
 
-`-truth` can be used with the other import options.
+  `-truth` can be used with the other import options.
 
 = JSON Support
 

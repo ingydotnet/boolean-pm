@@ -137,9 +137,7 @@ The module also defines these export tags:
 
 Exports C<true>, C<false>, C<boolean>, C<isTrue>, C<isFalse>, C<isBoolean>
 
-=back
-
-=head2 -truth
+=item C<-truth>
 
 You can specify the C<-truth> option to override truth operators to return
 C<boolean> values.
@@ -152,6 +150,8 @@ Prints:
     boolean
 
 C<-truth> can be used with the other import options.
+
+=back
 
 =head1 JSON SUPPORT
 
