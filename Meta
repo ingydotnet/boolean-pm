@@ -1,31 +1,27 @@
-=meta: 0.0.1
+=meta: 0.0.2
 
 name: boolean
-version: 0.41
+version: 0.42
 abstract: Boolean support for Perl
 homepage: https://metacpan.org/release/boolean
-
+language: perl
 license: perl
 copyright: 2007-2014. Ingy döt Net.
 author:
   name: Ingy döt Net
   email: ingy@cpan.org
+  homepage: http://ingy.net
   github: ingydotnet
   twitter: ingydotnet
   freenode: ingy
-  homepage: http://ingy.net
-
-requires:
-  perl: 5.8.1
-
-recommends:
-  JSON: 0
 
 devel:
   git: https://github.com/ingydotnet/boolean-pm
   bug: https://github.com/ingydotnet/boolean-pm/issues
   irc: irc.freenode.net#pkg
 
-=travis:
-  type: perl
-  irc: irc.freenode.net#pkg
+requires:
+  perl: 5.8.1
+
+recommends:
+  JSON: 0
