@@ -1,4 +1,10 @@
 ---
+version: 0.41
+date:    Fri Aug 15 15:41:09 PDT 2014
+changes:
+- Add t/000-compile-modules.t
+- CPAN Day 2014 - 21 Release Salute!
+---
 version: 0.40
 date:    Fri Aug  8 19:12:51 PDT 2014
 changes:
