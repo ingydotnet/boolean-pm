@@ -6,7 +6,8 @@ abstract: Boolean support for Perl
 homepage: https://metacpan.org/release/boolean
 language: perl
 license: perl
-copyright: 2007-2014. Ingy döt Net.
+copyright: 2007-2014
+
 author:
   name: Ingy döt Net
   email: ingy@cpan.org
