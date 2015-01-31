@@ -1,4 +1,4 @@
-use Test::More tests => 65;
+use Test::More tests => 61;
 use strict;
 use lib 'lib';
 
@@ -120,16 +120,6 @@ eval 'true(1)'; ok $@, "Can't pass values to true/false";
 eval 'true(@main::array)'; ok $@, "Can't pass values to true/false";
 eval 'true(())'; ok $@, "Can't pass values to true/false";
 eval 'false(undef)'; ok $@, "Can't pass values to true/false";
-
-# Check that true is immutable
-SKIP: {
-    skip "Need Readonly to make truth immutable", 4 if !eval { require Readonly };
-    for my $bool (true, false) {
-        my $truthiness = !!$bool;
-        ok !eval { $$bool = 0; 1 }, "truth is forever";
-        is $bool, $truthiness, "imutable";
-    }
-}
 
 ok true->isTrue, "true isTrue";
 ok false->isFalse, "false isFalse";

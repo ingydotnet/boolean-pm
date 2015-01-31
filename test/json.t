@@ -12,5 +12,6 @@ SKIP: {
             'JSON true works');
         is(ref(boolean::TO_JSON(true)), 'SCALAR',
             'Make sure we can call boolean::TO_JSON($b)');
-    }
+    };
+    diag "$@" if $@;
 };

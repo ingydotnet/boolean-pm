@@ -27,17 +27,10 @@ sub import {
 my ($true_val, $false_val, $bool_vals);
 
 BEGIN {
-    my $have_readonly = eval { require Readonly };
-
     my $t = 1;
     my $f = 0;
     $true  = do {bless \$t, 'boolean'};
     $false = do {bless \$f, 'boolean'};
-
-    if ( $have_readonly ) {
-        Readonly::Scalar($t => $t);
-        Readonly::Scalar($f => $f);
-    }
 
     $true_val  = overload::StrVal($true);
     $false_val = overload::StrVal($false);
