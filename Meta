@@ -1,7 +1,7 @@
 =meta: 0.0.2
 
 name: boolean
-version: 0.43
+version: 0.44
 abstract: Boolean support for Perl
 homepage: https://metacpan.org/release/boolean
 language: perl

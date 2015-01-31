@@ -1,4 +1,9 @@
 ---
+version: 0.44
+date:    Sat Jan 31 13:55:37 PST 2015
+changes:
+- Apply PRs 9,10,11 @dagolden++
+---
 version: 0.43
 date:    Thu Jan  1 00:27:42 PST 2015
 changes:
