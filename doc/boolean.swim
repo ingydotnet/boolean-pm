@@ -18,13 +18,6 @@ and:
   do &something if isTrue($guess);
   do &something_else if isFalse($guess);
 
-and:
-
-  use boolean -truth;
-
-  die unless ref(42 == 42) eq 'boolean';
-  die unless ("foo" =~ /bar/) eq '0';
-
 = Description
 
 Most programming languages have a native `Boolean` data type.  Perl does not.
@@ -113,19 +106,13 @@ The module also defines these export tags:
 
   Exports `true`, `false`, `boolean`, `isTrue`, `isFalse`, `isBoolean`
 
-- `-truth`
+= Deprecations
 
-  You can specify the `-truth` option to override truth operators to return
-  `boolean` values.
-
-    use boolean -truth;
-    print ref("hello" eq "world"), "\n";
-
-  Prints:
-
-    boolean
-
-  `-truth` can be used with the other import options.
+This module offered an export tag, `-truth`, that overrides the Perl
+interpreter's internal values for true and false.  This has been found to
+corrupt the interpreter in some circumstances.  Also, these overrides will no
+longer be possible as of Perl 5.22.  Therefore, the `-truth` import tag is
+deprecated.
 
 = JSON Support
 

@@ -59,6 +59,7 @@ sub isBoolean($) {
 }
 
 sub truth {
+    die "-truth not supported on Perl 5.22 or later" if $] >= 5.021005;
     # enable modifying true and false
     &Internals::SvREADONLY( \ !!0, 0);
     &Internals::SvREADONLY( \ !!1, 0);
