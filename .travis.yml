@@ -21,7 +21,7 @@ perl:
 install:
 - cpanm --quiet --notest
   Devel::Cover::Report::Coveralls
-  JSON
+  JSON::MaybeXS
 
 script:
 - true && [ ! -e test/ ] ||
