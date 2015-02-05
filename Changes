@@ -1,4 +1,9 @@
 ---
+version: 0.45
+date:    Thu Feb  5 15:39:26 PST 2015
+changes:
+- Remove last vestige of -truth from the tests!
+---
 version: 0.44
 date:    Sat Jan 31 13:55:37 PST 2015
 changes:

@@ -15,7 +15,7 @@ boolean - Boolean support for Perl
 
 =head1 Version
 
-This document describes L<boolean> version B<0.44>.
+This document describes L<boolean> version B<0.45>.
 ";
 
 =head1 Synopsis

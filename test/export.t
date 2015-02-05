@@ -13,7 +13,7 @@ package All;
 use boolean ':all';
 
 package Test;
-use boolean -truth, ':test';
+use boolean ':test';
 
 package main;
 
