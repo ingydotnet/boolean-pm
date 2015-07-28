@@ -37,6 +37,13 @@ BEGIN {
     $bool_vals = {$true_val => 1, $false_val => 1};
 }
 
+# refaddrs change on thread spawn, so CLONE fixes them up
+sub CLONE {
+    $true_val  = overload::StrVal($true);
+    $false_val = overload::StrVal($false);
+    $bool_vals = {$true_val => 1, $false_val => 1};
+}
+
 sub true()  { $true }
 sub false() { $false }
 sub boolean($) {
