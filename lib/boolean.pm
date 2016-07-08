@@ -1,6 +1,6 @@
 use strict; use warnings;
 package boolean;
-our $VERSION = '0.45';
+our $VERSION = '0.46';
 
 my ($true, $false);
 

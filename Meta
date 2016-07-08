@@ -1,12 +1,12 @@
 =meta: 0.0.2
 
 name: boolean
-version: 0.45
+version: 0.46
 abstract: Boolean support for Perl
 homepage: https://metacpan.org/release/boolean
 language: perl
 license: perl
-copyright: 2007-2015
+copyright: 2007-2016
 
 author:
   name: Ingy döt Net
