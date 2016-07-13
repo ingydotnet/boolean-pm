@@ -44,7 +44,7 @@ include: Hash, Array, String, Number, Null and Boolean. Perl lacks native
 Boolean support.
 
 Data interchange modules like YAML and JSON can now `use boolean` to
-encode/decode/roundtrip Boolean values.
+encode\/decode\/roundtrip Boolean values.
 
 = Functions
 
