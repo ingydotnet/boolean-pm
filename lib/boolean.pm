@@ -4,8 +4,14 @@ our $VERSION = '0.46';
 
 my ($true, $false);
 
+# returns native Perl dual-var for true/false
+sub _natify { !! ${$_[0]} }
+
 use overload
-    '""' => sub { ${$_[0]} },
+    '0+' => \&_natify,
+    '""' => \&_natify,
+    '++' => sub { $_[0] = _natify($_[0]) + 1 },
+    '--' => sub { $_[0] = _natify($_[0]) - 1 },
     '!' => sub { ${$_[0]} ? $false : $true },
     fallback => 1;
 
