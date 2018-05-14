@@ -66,16 +66,7 @@ sub isBoolean($) {
 }
 
 sub truth {
-    die "-truth not supported on Perl 5.22 or later" if $] >= 5.021005;
-    # enable modifying true and false
-    &Internals::SvREADONLY( \ !!0, 0);
-    &Internals::SvREADONLY( \ !!1, 0);
-    # turn perl internal booleans into blessed booleans:
-    ${ \ !!0 } = $false;
-    ${ \ !!1 } = $true;
-    # make true and false read-only again
-    &Internals::SvREADONLY( \ !!0, 1);
-    &Internals::SvREADONLY( \ !!1, 1);
+    die "The experimental -truth feature has been removed, as it's fragile and doesn't work on Perl since 5.22 anyway";
 }
 
 sub TO_JSON { ${$_[0]} ? \1 : \0 }

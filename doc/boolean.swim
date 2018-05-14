@@ -106,13 +106,13 @@ The module also defines these export tags:
 
   Exports `true`, `false`, `boolean`, `isTrue`, `isFalse`, `isBoolean`
 
-= Deprecations
+= Removed
 
-This module offered an export tag, `-truth`, that overrides the Perl
+This module offered an export tag, `-truth`, that overrode the Perl
 interpreter's internal values for true and false.  This has been found to
-corrupt the interpreter in some circumstances.  Also, these overrides will no
-longer be possible as of Perl 5.22.  Therefore, the `-truth` import tag is
-deprecated.
+corrupt the interpreter in some circumstances.  Also, these overrides are no
+longer possible as of Perl 5.22.  Therefore, use of the `-truth` import tag
+is now fatal.
 
 = JSON Support
 
@@ -120,8 +120,8 @@ JSON::MaybeXS (or less preferably JSON.pm ) will encode Perl data with
 boolean.pm values correctly if you use the `convert_blessed` option:
 
   use JSON::MaybeXS;
-  use boolean -truth;
+  use boolean;
   my $json = JSON::MaybeXS->new->convert_blessed;
-  say $json->encode({false => (0 == 1)});     # Says: '{"false":false}',
+  say $json->encode({false => false()});     # Says: '{"false":false}',
 
 <<<cpan-tail>>>
